@@ -1,7 +1,21 @@
 let color = "black";
+let click = false;
 
 document.addEventListener("DOMContentLoaded", function(){
     createBoard(32);
+
+    document.querySelector("body").addEventListener("click", function(e){
+        if(e.target.tagName != "BUTTON"){
+            click = !click;
+            let draw = document.querySelector("#draw");
+            if(click){
+                draw.innerText = "You can draw now";
+            }
+            else{
+                draw.innerText = "You cannot draw now";
+            }
+        }
+    })
     
 
     let btn_popup = document.querySelector("#pop-up");
@@ -44,11 +58,13 @@ function getSize() {
 
 
 function colorDiv(){
-    if(color == "random"){
-        this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`
-    }
-    else{
-        this.style.backgroundColor = 'black';
+    if(click){
+        if(color == "random"){
+            this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`
+        }
+        else{
+            this.style.backgroundColor = 'black';
+        }
     }
 }
 
